@@ -8,8 +8,19 @@ class ArticlesController < ApplicationController
 
 
   def create
+
     @article = Article.new(article_params)
-    @article.save
+    if @article.save
+      flash[:notice] = "article was created"
+      redirect_to article_path(@article)
+    else
+        render 'new'
+    end
+
+  end
+
+  def show
+    @article = Article.find(params[:id])
   end
 
 
